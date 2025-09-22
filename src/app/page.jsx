@@ -14,9 +14,3 @@ export default function Home() {
   );
 }
 
-/*
-  [header]
-  [[search] [create]nav-section]
-  [list]
-  [footer]
-*/
