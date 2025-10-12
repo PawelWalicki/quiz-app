@@ -5,7 +5,7 @@ import QuizList from "@/components/quiz-list";
 
 export default function Home() {
   return (
-    <div className="bg-gray-200 text-black h-screen p-[5vh] flex flex-col h-full items-center">
+    <div className="bg-gray-200 text-black h-full p-[5vh] flex flex-col h-full items-center">
       <Header/>
       <NavSection/>
       <QuizList/>

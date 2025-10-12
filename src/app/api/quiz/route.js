@@ -6,32 +6,40 @@ DELETE => Usun z bazy (id)
 */
 
 import { NextResponse } from "next/server"
-
+import { db } from "@/lib/firebase"
+import { ref, set, get } from "firebase/database"
+// [Przeg] <--GET/POST-> [Server] <----get/set/ref---> [Firebase]
 export async function GET(request) {
-    const quiz = [
-        {id: "123", title: "Jak ma na imie mlody Stuhr", correctAnswer: 1, options: ["Maciej", "Bartek", "Arek", "Wojtek"]}
-    ]
+    try {
+        const snapshot = await get(ref(db, 'quizzes'))
+        if (snapshot.exists()) {
+            const data = snapshot.val()
+            const quizzez = Object.values(data)
 
-    return new Response(JSON.stringify(quiz), {
-        status: 200,
-        headers: {"Content-Type": "application/json"}
-    })
+            return NextResponse.json(quizzez, { status: 200 })
+        } else {
+            return NextResponse.json(JSON.stringify([]), { status: 404 })
+        }
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json(JSON.stringify(error), { status: 500 })
+    }
 }
 
 const validatePostData = (quizData) => {
     const emptyFields = []
-    if(!quizData.quizTitle) { 
+    if (!quizData.quizTitle) {
         emptyFields.push('Lack of quiz title')
     }
     console.log(quizData.quizDescription)
-    if(!quizData.quizDescription) {
+    if (!quizData.quizDescription) {
         emptyFields.push('Lack of description')
     }
     quizData.questions.forEach((question, index) => {
-        if(!question.title) {
+        if (!question.title) {
             emptyFields.push(`Question ${index + 1}- no title`)
         }
-        if(question.correctAnswer < 1){
+        if (question.correctAnswer < 1) {
             emptyFields.push(`Question ${index + 1}- correct answer not set`)
         }
     });
@@ -39,15 +47,24 @@ const validatePostData = (quizData) => {
 }
 
 export async function POST(request) {
-    try { 
+    try {
         const data = await request.json()
         const validate = validatePostData(data)
-        if(validate.length>0) {
-            return NextResponse.json({error: validate}, {status: 400})
+        if (validate.length > 0) {
+            return NextResponse.json({ error: validate }, { status: 400 })
         }
-        console.log("Received data: ", JSON.stringify(data,null, 2))
-        return NextResponse.json({success: true, message:"Quiz saved"}, {status:200})
-    } catch(error) {
-        return NextResponse.json({error: "Failed to save quiz"}, {status:500})
-    }    
+        const id = `quiz_${Date.now()}`
+        try {
+            await set(ref(db, `quizzes/${id}`), { id, ...data })
+
+        }
+        catch (e) {
+            console.error(e)
+        }
+        return NextResponse.json({ success: true, message: "Quiz saved" }, { status: 200 })
+    } catch (error) {
+        return NextResponse.json({ error: "Failed to save quiz" }, { status: 500 })
+    }
 }
+
+ 

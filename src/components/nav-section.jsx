@@ -3,7 +3,7 @@ import Search from "./search";
 
 export default function NavSection() {
     return (
-        <div className="w-full pt-[5vh] flex justify-around" >
+        <div className="md:w-full pt-[5vh] flex flex-col md:flex-row justify-around " >
             <Search />
             <CreateButton />
         </div>
