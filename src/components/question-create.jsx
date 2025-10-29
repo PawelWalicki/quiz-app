@@ -55,28 +55,28 @@ export default function QuestionCreate({ question, questionIndex, setQuestions, 
                 onChange={(e) => setQuestionTitle(e.target.value)}
             ></input>
             <div>
-                <input type="radio" onChange={() => selectCorrectAnswerHandler(1)} checked={question.correctAnswer == 1} />
+                <input type="radio" onChange={() => selectCorrectAnswerHandler(0)} checked={question.correctAnswer == 0} />
                 <input type="text" className="pl-4 pr-1 py-1 border rounded-lg bg-white m-2 hover:cursor-pointer" placeholder="A"
                     value={question.options[0]}
                     onChange={e => handleAnswerChange(0, e.target.value)}
                 ></input>
             </div>
             <div>
-                <input type="radio" onChange={() => selectCorrectAnswerHandler(2)} checked={question.correctAnswer == 2} />
+                <input type="radio" onChange={() => selectCorrectAnswerHandler(1)} checked={question.correctAnswer == 1} />
                 <input type="text" className="pl-4 pr-1 py-1 border rounded-lg bg-white m-2 hover:cursor-pointer" placeholder="B"
                     value={question.options[1]}
                     onChange={e => handleAnswerChange(1, e.target.value)}
                 ></input>
             </div>
             <div>
-                <input type="radio" onChange={() => selectCorrectAnswerHandler(3)} checked={question.correctAnswer == 3} />
+                <input type="radio" onChange={() => selectCorrectAnswerHandler(2)} checked={question.correctAnswer == 2} />
                 <input type="text" className="pl-4 pr-1 py-1 border rounded-lg bg-white m-2 hover:cursor-pointer" placeholder="C"
                     value={question.options[2]}
                     onChange={e => handleAnswerChange(2, e.target.value)}
                 ></input>
             </div>
             <div>
-                <input type="radio" onChange={() => selectCorrectAnswerHandler(4)} checked={question.correctAnswer == 4} />
+                <input type="radio" onChange={() => selectCorrectAnswerHandler(3)} checked={question.correctAnswer == 3} />
                 <input type="text" className="pl-4 pr-1 py-1 border rounded-lg bg-white m-2 hover:cursor-pointer" placeholder="D"
                     value={question.options[3]}
                     onChange={e => handleAnswerChange(3, e.target.value)}

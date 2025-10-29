@@ -14,7 +14,12 @@ export async function GET(request) {
         const snapshot = await get(ref(db, 'quizzes'))
         if (snapshot.exists()) {
             const data = snapshot.val()
-            const quizzez = Object.values(data)
+            const quizzez = Object.values(data).map(quiz => (
+                {
+                    ...quiz,
+                    questions: quiz.questions.map(({correctAnswer, ...rest}) => rest)
+                }
+            ))
 
             return NextResponse.json(quizzez, { status: 200 })
         } else {
