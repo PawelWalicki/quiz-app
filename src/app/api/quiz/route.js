@@ -59,8 +59,9 @@ export async function POST(request) {
             return NextResponse.json({ error: validate }, { status: 400 })
         }
         const id = `quiz_${Date.now()}`
+        const now = Date.now()
         try {
-            await set(ref(db, `quizzes/${id}`), { id, ...data })
+            await set(ref(db, `quizzes/${id}`), { id, createdAt: now, ...data })
 
         }
         catch (e) {

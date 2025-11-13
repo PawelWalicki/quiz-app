@@ -13,7 +13,7 @@ export const Question = ({ question, choseAnswers, setChoseAnswers, idx }) => {
             <div>
                 {question.options.map((e, answerIdx) => (
                     <div key={e.id} className="pl-4 pr-1 py-1 border rounded-lg bg-[#CBDCEB] m-2 flex content-center"> 
-                        <input className="mr-2 hover:cursor-pointer" checked={answerIdx == choseAnswers[idx]} onChange={() => setSelected(answerIdx)} type="radio"></input>
+                        <input className="mr-2 hover:cursor-pointer" checked={answerIdx === choseAnswers[idx]} onChange={() => setSelected(answerIdx)} type="radio"></input>
                         {e} 
                     </div>
                 ))}

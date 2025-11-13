@@ -1,16 +1,6 @@
-import { useState } from "react"
 
 export default function QuestionCreate({ question, questionIndex, setQuestions, title }) {
-   //  const [questionState, setQuestionState] = useState({ title: '', answers: ['', '', '', ''], correctAnswer: 1 })
-
-    /*const handleAnswerChange = (index, value) => {
-        setQuestionState(prev => {
-            const newAnswers = [...prev.answers]
-            newAnswers[index] = value
-            return { ...prev, answers: newAnswers }
-        })
-    }*/
-
+ 
     const setQuestionTitle = (title) => {
         setQuestions((prev) => {
             const updated = [...prev];
@@ -18,15 +8,7 @@ export default function QuestionCreate({ question, questionIndex, setQuestions, 
             return updated
         })
     } 
-    /*
-    [{
-            id: Date.now().toString() + Math.random.toString().substr(2, 9),
-            title: '',
-            options: ['', '', '', ''],
-            correctAnswer: 0
-}]
-    */
-
+  
     const handleAnswerChange = (index, answer) => {
         setQuestions(prev => {
             const updated = [...prev]

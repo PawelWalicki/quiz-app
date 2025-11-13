@@ -1,14 +1,30 @@
 'use client'
 import QuestionCreate from "@/components/question-create"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useState, useEffect, use } from "react"
+import { useRouter, useParams } from "next/navigation"
 import { ToastContainer, toast } from 'react-toastify';
 
 export default function QuizCreate() {
-    const [questions, setQuestions] = useState([createEmptyQuestion()])
+    const [createdAt, setCreatedAt] = useState(null)
+    const [id,setId] = useState("")
+    const [questions, setQuestions] = useState([])
     const [quizTitle, setQuizTitle] = useState("")
     const [quizDescription, setQuizDescription] = useState("")
     const router = useRouter()
+    const params = useParams()
+
+    useEffect(() => {
+        fetch(`/api/quiz/${params.id}`)
+            .then(respone => respone.json())
+            .then(json => {
+                setCreatedAt(json.createdAt)
+                setId(json.id)
+                setQuestions(json.questions)
+                setQuizTitle(json.quizTitle)
+                setQuizDescription(json.quizDescription)
+            })
+            .catch(e => console.error(e));
+    }, [])
 
     function createEmptyQuestion() {
         return {
@@ -27,18 +43,20 @@ export default function QuizCreate() {
 
     async function handleSave() {
         const quizData = {
+            createdAt,
+            id,
             quizTitle,
             quizDescription,
             questions
         }
         try {
-            const response = await fetch('/api/quiz', {
-                method: "POST",
+            const response = await fetch(`/api/quiz/${params.id}`, {
+                method: "PUT",
                 body: JSON.stringify(quizData)
             })
             const responseBody = await response.json()
-            if(response.ok) {
-                router.push("/?created=true")
+            if (response.ok) {
+                router.push("/?edited=true")
             }
             if (!response.ok) {
                 console.log(response.status)
