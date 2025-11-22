@@ -1,7 +1,7 @@
-export default function Footer() {
+export default function Footer({numberOfQuizes}) {
     return (
         <div className=" pt-[5vh]">
-            Licznik: 1
+            Quantity: {numberOfQuizes}
         </div>
     )
 }

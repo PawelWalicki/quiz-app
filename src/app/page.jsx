@@ -4,10 +4,10 @@ import Header from "@/components/header";
 import NavSection from "@/components/nav-section";
 import QuizList from "@/components/quiz-list";
 import { QuizNotifications } from "@/components/quiz-notifications";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 
 export default function Home() {
-
+  const [numberOfQuizes, setNumberOfQuizes] = useState(0)
   return (
     <div className="bg-gray-200 text-black h-full p-[5vh] flex flex-col h-full items-center">
       <Suspense fallback={<div>Loading</div>}>
@@ -15,8 +15,8 @@ export default function Home() {
       </Suspense>
       <Header />
       <NavSection />
-      <QuizList />
-      <Footer />
+      <QuizList setNumberOfQuizes = {setNumberOfQuizes}/>
+      <Footer numberOfQuizes = {numberOfQuizes}/>
     </div>
   );
 }

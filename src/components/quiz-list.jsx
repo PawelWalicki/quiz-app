@@ -2,12 +2,16 @@
 import { useEffect, useState } from "react"
 import { QuizGrid } from "./quiz-grid";
 
-export default function QuizList() {
-
+export default function QuizList({ setNumberOfQuizes }) {
     const [quizzes, setQuizzes] = useState([])
-    useEffect(() => { 
+
+    useEffect(() => {
+        setNumberOfQuizes(quizzes.length)
+    }, [quizzes])
+
+    useEffect(() => {
         fetch('/api/quiz')
-            .then(response => response.json())  
+            .then(response => response.json())
             .then(json => setQuizzes(json))
             .catch(error => console.error("Błąd pobierania:", error));
 
