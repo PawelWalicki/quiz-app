@@ -4,19 +4,27 @@ import Header from "@/components/header";
 import NavSection from "@/components/nav-section";
 import QuizList from "@/components/quiz-list";
 import { QuizNotifications } from "@/components/quiz-notifications";
+import { useAuth } from "@/context/AuthContext";
 import { Suspense, useState } from "react";
 
 export default function Home() {
   const [numberOfQuizes, setNumberOfQuizes] = useState(0)
+  const {loading} = useAuth()
+
+  if(loading) {
+    return (
+      <div>Loading...</div>
+    )
+  }
   return (
     <div className="bg-gray-200 text-black h-full p-[5vh] flex flex-col h-full items-center">
       <Suspense fallback={<div>Loading</div>}>
-        <QuizNotifications/>
+        <QuizNotifications />
       </Suspense>
       <Header />
       <NavSection />
-      <QuizList setNumberOfQuizes = {setNumberOfQuizes}/>
-      <Footer numberOfQuizes = {numberOfQuizes}/>
+      <QuizList setNumberOfQuizes={setNumberOfQuizes} />
+      <Footer numberOfQuizes={numberOfQuizes} />
     </div>
   );
 }
