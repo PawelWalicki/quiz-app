@@ -2,14 +2,15 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { QuziForm } from "@/components/quiz-form";
-import { ToastContainer, toast } from 'react-toastify';
-
+import { toast } from 'react-toastify';
+import { useAuth } from "@/context/AuthContext";
 
 export default function QuizCreate() {
     const [questions, setQuestions] = useState([createEmptyQuestion()])
     const [quizTitle, setQuizTitle] = useState("")
     const [quizDescription, setQuizDescription] = useState("")
     const router = useRouter()
+    const {user} = useAuth()
 
     function createEmptyQuestion() {
         return {
@@ -30,8 +31,10 @@ export default function QuizCreate() {
         const quizData = {
             quizTitle,
             quizDescription,
-            questions
+            questions,
+            uid: user.uid
         }
+
         try {
             const response = await fetch('/api/quiz', {
                 method: "POST",

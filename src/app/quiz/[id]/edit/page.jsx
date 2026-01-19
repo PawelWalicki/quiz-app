@@ -2,6 +2,7 @@
 import { useState, useEffect, use } from "react"
 import { useRouter, useParams } from "next/navigation"
 import { QuziForm } from "@/components/quiz-form";
+import { useAuth } from "@/context/AuthContext";
 
 
 export default function QuizCreate() {
@@ -12,19 +13,24 @@ export default function QuizCreate() {
     const [quizDescription, setQuizDescription] = useState("")
     const router = useRouter()
     const params = useParams()
+    const {user, loading} = useAuth()
 
     useEffect(() => {
         fetch(`/api/quiz/${params.id}`)
             .then(respone => respone.json())
             .then(json => {
+                if(!loading && user.uid == json.uid) {
                 setCreatedAt(json.createdAt)
                 setId(json.id)
                 setQuestions(json.questions)
                 setQuizTitle(json.quizTitle)
                 setQuizDescription(json.quizDescription)
+                } else {
+                    router.push("/")
+                }
             })
             .catch(e => console.error(e));
-    }, [])
+    }, [user])
 
     function createEmptyQuestion() {
         return {
