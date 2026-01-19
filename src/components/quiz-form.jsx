@@ -11,7 +11,7 @@ export const QuziForm = ({ setQuizTitle, setQuizDescription, questions, setQuest
             <ToastContainer />
             <div className="flex flex-row items-center">
                 <button
-                    className="bg-blue-600 text-white py-2 px-4 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition hover:cursor-pointer rounded-lg "
+                    className="bg-blue-600 text-white py-2 px-4 rounded-lg flex items-center gap-2 shadow-md hover:bg-blue-700 transition duration-200 transform hover:-translate-y-0.5 hover:cursor-pointer rounded-lg "
                     onClick={() => router.push("/")}>
                     Back
                 </button>
@@ -35,12 +35,12 @@ export const QuziForm = ({ setQuizTitle, setQuizDescription, questions, setQuest
             </div>
             <div className="flex flex-row " >
                 <button
-                    className="bg-blue-600 text-white py-2 px-4 mt-4 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition hover:cursor-pointer rounded-lg "
+                    className="bg-blue-600 text-white py-2 px-4 mt-4 rounded-lg flex items-center gap-2 shadow-md hover:bg-blue-700 transition duration-200 transform hover:-translate-y-0.5 hover:cursor-pointer rounded-lg "
                     onClick={() => setQuestions(prev => [...prev, createEmptyQuestion()])}>
                     + Add question
                 </button>
                 <button
-                    className="bg-green-600 text-white py-2 px-4 mt-4 rounded-lg flex items-center gap-2 hover:bg-green-700 transition hover:cursor-pointer rounded-lg ml-4"
+                    className="bg-green-600 text-white py-2 px-4 mt-4 rounded-lg flex items-center gap-2 shadow-md hover:bg-green-700 transition duration-200 transform hover:-translate-y-0.5 hover:cursor-pointer rounded-lg ml-4"
                     onClick={() => handleSave()}>
                     Save
                 </button>
