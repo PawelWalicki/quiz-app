@@ -53,11 +53,15 @@ export default function QuizCreate() {
             id,
             quizTitle,
             quizDescription,
-            questions
+            questions,
+            uid: user.uid
         }
         try {
             const response = await fetch(`/api/quiz/${params.id}`, {
                 method: "PUT",
+                headers: {
+                    'Authorization': user.uid
+                },
                 body: JSON.stringify(quizData)
             })
             const responseBody = await response.json()
@@ -76,7 +80,7 @@ export default function QuizCreate() {
     }
 
     return (
-        <QuziForm setQuizTitle={setQuizTitle} setQuizDescription={setQuizDescription} questions={questions}
-            setQuestions={setQuestions} createEmptyQuestion={createEmptyQuestion} handleSave={handleSave} quizTitle={quizTitle} quizDescription={quizDescription} />
+        <QuziForm setQuizTitle={setQuizTitle} setQuizDescription={setQuizDescription} questions={questions} setQuestions={setQuestions} 
+        createEmptyQuestion={createEmptyQuestion} handleSave={handleSave} quizTitle={quizTitle} quizDescription={quizDescription} pageTitle="Edit quiz"/>
     )
 }

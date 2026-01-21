@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useRouter } from "next/navigation"
 
 
-export const QuziForm = ({ setQuizTitle, setQuizDescription, questions, setQuestions, createEmptyQuestion, handleSave, quizDescription, quizTitle }) => {
+export const QuziForm = ({ setQuizTitle, setQuizDescription, questions, setQuestions, createEmptyQuestion, handleSave, quizDescription, quizTitle, pageTitle }) => {
     const router = useRouter()
 
     return (
@@ -15,7 +15,7 @@ export const QuziForm = ({ setQuizTitle, setQuizDescription, questions, setQuest
                     onClick={() => router.push("/")}>
                     Back
                 </button>
-                <p className="pl-2">Create new quiz</p>
+                <p className="pl-2">{pageTitle}</p>
             </div>
             <div className="bg-white border rounded-lg p-3 mt-4" >
                 <p>Basic information</p>

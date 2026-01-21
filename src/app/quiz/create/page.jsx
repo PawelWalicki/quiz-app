@@ -56,7 +56,7 @@ export default function QuizCreate() {
     }
 
     return (
-        <QuziForm setQuizTitle={setQuizTitle} setQuizDescription={setQuizDescription} questions={questions} 
+        <QuziForm setQuizTitle={setQuizTitle} setQuizDescription={setQuizDescription} questions={questions} pageTitle="Create new quiz"
         setQuestions={setQuestions} createEmptyQuestion={createEmptyQuestion} handleSave={handleSave} quizTitle={quizTitle} quizDescription={quizDescription}/>
     )
 }
