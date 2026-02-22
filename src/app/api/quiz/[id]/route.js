@@ -28,7 +28,8 @@ export async function PUT(request, { params }) {
         return NextResponse.json({ message: "Quiz not found" }, { status: 404 })
     }
     const authHeader = request.headers.get("Authorization")
-    if (snapshot.uid != authHeader) {
+    if (snapshot.val().uid != authHeader) {
+        console.log(snapshot.val(), authHeader)
        return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
     const newQuizData = await request.json()
@@ -36,4 +37,3 @@ export async function PUT(request, { params }) {
     return NextResponse.json({ message: "Quiz edited" }, { status: 200 })
 }
 
-// [C] -> [S] <get-> [DB]

@@ -36,7 +36,6 @@ const validatePostData = (quizData) => {
     if (!quizData.quizTitle) {
         emptyFields.push('Lack of quiz title')
     }
-    console.log(quizData.quizDescription)
     if (!quizData.quizDescription) {
         emptyFields.push('Lack of description')
     }
